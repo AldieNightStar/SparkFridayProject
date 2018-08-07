@@ -12,7 +12,7 @@ Spark FridayProject --> Using link shortener to monetize your apps (even localho
 
 
         // Adding once-use url
-        String url = friday.step((req, res) -> {
+        String url = friday.step(/* to wrap redirect for localhost */ true, (req, res) -> {
             return "xxx";
         }); // it will remove itself after click on that
 
