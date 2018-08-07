@@ -14,7 +14,7 @@ public class Main {
 
 
         // Adding once-use url
-        String url = friday.step((req, res) -> {
+        String url = friday.step(/* to wrap redirect for localhost */ true, (req, res) -> {
             return "xxx";
         }); // it will remove itself after click on that
 

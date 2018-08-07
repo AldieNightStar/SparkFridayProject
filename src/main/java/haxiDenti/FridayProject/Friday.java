@@ -27,10 +27,11 @@ public class Friday {
         return protocolPrefix + "://" + shortenerName + "/" + userAPIKey + "/" + stripProtocol(link);
     }
 
-    public String step(FridayHandler handler) {
+    public String step( boolean useFridayWrapper, FridayHandler handler) {
         String stepName = list.generateStep(handler);
         String locationToGo = hostNameAndPort + defaultURLStepExecPath + stepName;
-        return link(linkRedirector(locationToGo));
+        if (useFridayWrapper) return link(linkRedirector(locationToGo));
+        return link(locationToGo);
     }
 
     private String stripProtocol(String str) {
