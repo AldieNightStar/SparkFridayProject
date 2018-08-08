@@ -3,6 +3,8 @@ package haxiDenti.FridayProject;
 import spark.Service;
 import spark.utils.StringUtils;
 
+import java.time.LocalDate;
+
 public class Friday {
     private String shortenerName;
     private String userAPIKey;
@@ -27,10 +29,10 @@ public class Friday {
         return protocolPrefix + "://" + shortenerName + "/" + userAPIKey + "/" + stripProtocol(link);
     }
 
-    public String step( boolean useFridayWrapper, FridayHandler handler) {
+    public String step(boolean useFridayWrapper, FridayHandler handler) {
         String stepName = list.generateStep(handler);
         String locationToGo = hostNameAndPort + defaultURLStepExecPath + stepName;
-        if (useFridayWrapper) return link(linkRedirector(locationToGo));
+        if (useFridayWrapper) return link(fridayLinkWrap(locationToGo));
         return link(locationToGo);
     }
 
@@ -47,7 +49,7 @@ public class Friday {
 
     public void init(String hostNameAndPort) {
         this.hostNameAndPort = hostNameAndPort;
-        sparkService.get(defaultURLStepExecPath + ":step", (req, res)->{
+        sparkService.get(defaultURLStepExecPath + ":step", (req, res) -> {
             String stepName = req.params("step");
             if (StringUtils.isEmpty(stepName)) {
                 return "incorrect";
@@ -58,8 +60,18 @@ public class Friday {
         });
     }
 
-    private static String linkRedirector(String link) {
-        return "aldienightstar.github.io/friday/index.html?redir=" + link;
+    private static String fridayLinkWrap(String link) {
+        String prefixLink = "aldienightstar.github.io/friday/index.html";
+        String dateLink = "?dl=" + generateSecureDateKey();
+        String redirLink = "?redir=" + link;
+        return prefixLink + dateLink + redirLink;
+    }
+
+    private static String generateSecureDateKey() {
+        LocalDate date = LocalDate.now();
+        int dayNumber = date.getDayOfYear();
+        return String.valueOf(1000 - dayNumber);
+        // 1000 - result -> to get Back dayNumber :)
     }
 
 }
