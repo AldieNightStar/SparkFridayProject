@@ -1,6 +1,29 @@
 # SparkFridayProject
 Spark FridayProject --> Using link shortener to monetize your apps (even localhost ;))
 
+# Install
+
+### Add repository
+```xml
+<repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+</repositories>
+```
+
+### Add dependency
+```xml
+<dependency>
+    <groupId>com.github.AldieNightStar</groupId>
+    <artifactId>SparkFridayProject</artifactId>
+    <version>Tag</version>
+</dependency>
+```
+
+
+# Usage
 ``` java
         // Java Spark service init
         Service service = Service.ignite().port(8080);
