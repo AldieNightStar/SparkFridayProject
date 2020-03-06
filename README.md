@@ -18,7 +18,7 @@ Spark FridayProject --> Using link shortener to monetize your apps (even localho
 <dependency>
     <groupId>com.github.AldieNightStar</groupId>
     <artifactId>SparkFridayProject</artifactId>
-    <version>Tag</version>
+    <version>-SNAPSHOT</version>
 </dependency>
 ```
 
